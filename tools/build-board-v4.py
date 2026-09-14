@@ -166,10 +166,14 @@ if e_top and e_low:  # px the tile drifts sideways per row, going up
 NH = BH + PAD_PX
 tall = Image.new("RGB", (BW, NH), CREAM)
 tall.paste(board.crop((0, 0, BW, FRAME_PX)), (0, 0))              # frame stays on top
-first_row = board.crop((0, FRAME_PX, BW, FRAME_PX + 1))
+# Extrude the board's INTERIOR only. Including the frame columns and sliding
+# the whole row sideways dragged a copy of the black left column into the
+# board, showing as a tapering black sliver in the top-left corner
+# (Kharisel, Sep 14).
+first_row = board.crop((FRAME_PX, FRAME_PX, BW - FRAME_PX, FRAME_PX + 1))
 for k in range(PAD_PX):
     dy = PAD_PX - k                       # rows above the artwork's own top
-    tall.paste(first_row, (round(slope * dy), FRAME_PX + k))
+    tall.paste(first_row, (FRAME_PX + round(slope * dy), FRAME_PX + k))
 tall.paste(board.crop((0, FRAME_PX, BW, BH)), (0, FRAME_PX + PAD_PX))
 side = Image.new("RGB", (FRAME_PX, PAD_PX), (0, 0, 0))
 tall.paste(side, (0, FRAME_PX))                                    # left frame column

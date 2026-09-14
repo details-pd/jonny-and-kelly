@@ -59,7 +59,7 @@ const KIT = {
   },
 
   board: {
-    image: "assets/v4/board-play.jpg?v=2",
+    image: "assets/v4/board-play.jpg?v=3",
     // native design space; all fractions map onto this (w, h)
     size: [1938, 3313],
     // the couple waits together on the TOP RED piece (Waheed, Aug 19)
